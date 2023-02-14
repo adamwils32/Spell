@@ -2,19 +2,18 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Stream;
 
 
 public class Spell {
 
     private static Hashtable<String, Boolean> dictionary;
-    Spell(String file) {
+    Spell(String dict_file, String file_to_check) {
         // Load dictionary words from file into Hashtable
         dictionary = new Hashtable<String, Boolean>();
         try {
-            Scanner scanner = new Scanner(new File(file));
+            Scanner scanner = new Scanner(new File(dict_file));
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
                 dictionary.put(line, Boolean.TRUE);
@@ -36,7 +35,7 @@ public class Spell {
 
     public static void main(String[] args) {
         // init an object of type Spell
-        Spell spell = new Spell(args[0]);
+        Spell spell = new Spell(args[0], args[1]);
         System.out.println(getDictionary());
 
         // add your code here
@@ -67,12 +66,39 @@ public class Spell {
     public static boolean suggestCorrections(String word) {
 
         System.out.println(word + ": Incorrect Spelling");
-        ArrayList<String> insertion_array_list= correctSpellingWithInsertion(word);
-        String[] substitution = correctSpellingSubstitution(word).trim().split(" ");
-        String[] omission = correctSpellingWithOmission(word).trim().split(" ");
-        String[] insertion = insertion_array_list.toArray(new String[insertion_array_list.size()]);
-        String[] reversal = correctSpellingWithReversal(word).trim().split(" ");
-        return null;
+
+        ArrayList<String> substitution = new ArrayList<>(List.of(correctSpellingSubstitution(word).trim().split(" ")));
+        ArrayList<String> omission = new ArrayList<>(List.of(correctSpellingWithOmission(word).trim().split(" ")));
+        ArrayList<String> insertion = correctSpellingWithInsertion(word);
+        ArrayList<String> reversal = new ArrayList<>(List.of(correctSpellingWithReversal(word).trim().split(" ")));
+
+        ArrayList<String> suggestions = new ArrayList<>();
+
+        for (String i : substitution){
+            if (!substitution.contains(i)){
+                substitution.add(i);
+            }
+        }
+
+        for (String i : omission){
+            if (!omission.contains(i)){
+                omission.add(i);
+            }
+        }
+
+        for (String i : insertion){
+            if (!insertion.contains(i)){
+                insertion.add(i);
+            }
+        }
+
+        for (String i : reversal){
+            if (!reversal.contains(i)){
+                reversal.add(i);
+            }
+        }
+
+        return !suggestions.equals(new ArrayList<>());
     }
 
     // This function takes in a string word and tries to correct the spelling by substituting letters and 
