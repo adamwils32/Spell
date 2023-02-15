@@ -4,12 +4,11 @@ import java.util.Hashtable;
 public class TestHashDictionary {
 
     public static void main(String[] args) {
-        Spell spell = new Spell();
-        Hashtable<String, Boolean> dictionary = spell.getDictionary();
+        Spell spell = new Spell(args[0],args[1]);
 
         // Test case 1: Check if dictionary is not empty
         System.out.println("++++++++++++++++++++++++++");
-        if (dictionary.size() > 0) {
+        if (spell.dictionary.size() > 0) {
             System.out.println("Test case 1: Passed, the dictionary is not empty");
         } else {
             System.out.println("Test case 1: Failed, the dictionary is empty");
@@ -17,7 +16,7 @@ public class TestHashDictionary {
 
         // Test case 2: Check if dictionary is loaded properly
         System.out.println("++++++++++++++++++++++++++");
-        if (dictionary.containsKey("cats")) {
+        if (spell.checkSpelling("cats")) {
             System.out.println("Test case 2: Passed, the dictionary is loaded correctly");
         } else {
             System.out.println("Test case 2: Failed, the dictionary doesn't loaded correctly");
