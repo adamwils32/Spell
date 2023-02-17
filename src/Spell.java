@@ -12,6 +12,11 @@ import java.util.*;
 
 public class Spell {
 
+    /* Although Hashtable dictionary should be declared private,
+     doing this causes an error in TestHashDictionary.java
+     due to the dictionary access "spell.dictionary.size()" in line 11.
+     Had line 11 been "spell.getDictionary().size()" declaring dictionary
+     privately would work.*/
     public Hashtable<String, Boolean> dictionary;
     Spell(String dict_file, String file_to_check) {
         // Load dictionary words from file into Hashtable
