@@ -2,7 +2,10 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 
 
@@ -11,7 +14,7 @@ public class Spell {
     public Hashtable<String, Boolean> dictionary;
     Spell(String dict_file, String file_to_check) {
         // Load dictionary words from file into Hashtable
-        this.dictionary = new Hashtable<String, Boolean>();
+        this.dictionary = new Hashtable<>();
         try {
             Scanner scanner1 = new Scanner(new File(dict_file));
             while (scanner1.hasNextLine()) {
@@ -21,7 +24,7 @@ public class Spell {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        // add your code here
+
 
 
 
@@ -36,7 +39,7 @@ public class Spell {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        // add your code here
+
 
     }
 
@@ -73,7 +76,7 @@ public class Spell {
     public boolean suggestCorrections(String word) {
 
         System.out.println(word + ": Incorrect Spelling");
-
+        // Creates an ArrayList for each suggestion type
         ArrayList<String> substitution = new ArrayList<>(List.of(this.correctSpellingSubstitution(word).trim().split(" ")));
         ArrayList<String> omission = new ArrayList<>(List.of(this.correctSpellingWithOmission(word).trim().split(" ")));
         ArrayList<String> insertion = correctSpellingWithInsertion(word);
@@ -81,29 +84,35 @@ public class Spell {
 
         ArrayList<String> suggestions = new ArrayList<>();
 
+        // Adds all suggestions from substitution to the general suggestions ArrayList
         for (String i : substitution){
             if (!suggestions.contains(i.toLowerCase())){
                 suggestions.add(i);
             }
         }
 
+        // Adds all suggestions from omission to the general suggestions ArrayList
         for (String i : omission){
             if (!suggestions.contains(i.toLowerCase())){
                 suggestions.add(i);
             }
         }
 
+        // Adds all suggestions from insertion to the general suggestions ArrayList
         for (String i : insertion){
             if (!suggestions.contains(i.toLowerCase())){
                 suggestions.add(i);
             }
         }
 
+        // Adds all suggestions from reversal to the general suggestions ArrayList
         for (String i : reversal){
             if (!suggestions.contains(i.toLowerCase())){
                 suggestions.add(i);
             }
         }
+
+        // Prints/formats all suggestions for word
         System.out.print(word + " => ");
         suggestions.removeAll(List.of(new String[]{"", word, word.toLowerCase()}));
         if(suggestions.size() > 0){

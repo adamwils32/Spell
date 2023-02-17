@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2104bb2e-7ef8-4824-a0a6-07ea6cdfd70c" name="Changes" comment="Initial Commit2" />
+    <list default="true" id="2104bb2e-7ef8-4824-a0a6-07ea6cdfd70c" name="Changes" comment="Finished suggestCorrections method">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Spell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Spell.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -19,12 +29,58 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/adamw/IdeaProjects/Wordle&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\adamw\IdeaProjects\Spell\src" />
+      <recent name="C:\Users\adamw\IdeaProjects\Spell" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.TestHashDictionary">
+    <configuration name="Spell" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Spell" />
+      <module name="Spell" />
+      <option name="PROGRAM_PARAMETERS" value="Dictionary.txt fileToCheck.txt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TestHashDictionary" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="false" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="Spell" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestHashDictionary" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestHashDictionary" />
+      <module name="Spell" />
+      <option name="PROGRAM_PARAMETERS" value="dictionary.txt fileToCheck.txt" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Spell" />
+      <item itemvalue="Application.TestHashDictionary" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.TestHashDictionary" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -48,7 +104,42 @@
       <option name="project" value="LOCAL" />
       <updated>1675898225146</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Blank project files">
+      <created>1675898631669</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1675898631669</updated>
+    </task>
+    <task id="LOCAL-00004" summary="finished first part of Spell(), getDictionary(), checkSpelling(), currently working on suggestCorrections">
+      <created>1676331288322</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1676331288323</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Finished suggestCorrections method">
+      <created>1676414905132</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1676414905132</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Finished suggestCorrections method">
+      <created>1676437450830</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1676437450830</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Finished suggestCorrections method">
+      <created>1676598431230</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1676598431230</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -77,6 +168,20 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="Initial Commit2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit2" />
+    <MESSAGE value="Blank project files" />
+    <MESSAGE value="finished first part of Spell(), getDictionary(), checkSpelling(), currently working on suggestCorrections" />
+    <MESSAGE value="Finished suggestCorrections method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished suggestCorrections method" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TestHashDictionary.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
