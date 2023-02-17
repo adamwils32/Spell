@@ -1,13 +1,14 @@
-
+/**
+ * The Spell program is a spell checking application.
+ * It should be run from the command line using the following command:
+ * java Spell dictionary.txt fileToCheck.txt
+ * @author Adam Wilson
+ * @since   2023-02-17
+ * */
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Scanner;
-import java.util.ArrayList;
-
-
+import java.util.*;
 
 public class Spell {
 
@@ -26,34 +27,29 @@ public class Spell {
         }
 
 
-
-
-
         // Load words in fileToCheck.txt
         try {
             Scanner scanner2 = new Scanner(new File(file_to_check));
             while (scanner2.hasNextLine()) {
-                checkSpelling(scanner2.nextLine().trim().toLowerCase());
+                checkSpelling(scanner2.nextLine().trim());
             }
             scanner2.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-
     }
 
     public static void main(String[] args) {
         // init an object of type Spell
         Spell spell = new Spell(args[0], args[1]);
-        spell.checkSpelling("hlelo");
+        //spell.checkSpelling("hlelo");
 
-        // add your code here
+
     }
 
     // this function check if the dictionary is loaded or not
     public Hashtable<String, Boolean> getDictionary(){
-        // add your code here
         return this.dictionary;
     }
 
@@ -61,8 +57,8 @@ public class Spell {
     // If the word exists, it will print it with a message "Incorrect Spelling:" to the console.
     // Else it will call the suggestCorrections function to provide the correct word from the words given in the dictionary file.
     public boolean checkSpelling(String word){
-       boolean check = this.dictionary.containsKey(word);
-       if(check){System.out.println(word + ": Correct Spelling");}
+       boolean check = this.dictionary.containsKey(word.toLowerCase());
+       if(check){System.out.println(word.toLowerCase() + ": Correct Spelling");}
        else {suggestCorrections(word);}
        return check;
     }
@@ -78,70 +74,53 @@ public class Spell {
         System.out.println(word + ": Incorrect Spelling");
         // Creates an ArrayList for each suggestion type
         ArrayList<String> substitution = new ArrayList<>(List.of(this.correctSpellingSubstitution(word).trim().split(" ")));
+        substitution.removeAll(Collections.singleton(""));
+
         ArrayList<String> omission = new ArrayList<>(List.of(this.correctSpellingWithOmission(word).trim().split(" ")));
+        omission.removeAll(Collections.singleton(""));
+
         ArrayList<String> insertion = correctSpellingWithInsertion(word);
+        insertion.removeAll(Collections.singleton(""));
+
         ArrayList<String> reversal = new ArrayList<>(List.of(correctSpellingWithReversal(word).trim().split(" ")));
+        reversal.removeAll(Collections.singleton(""));
 
         ArrayList<String> suggestions = new ArrayList<>();
 
-        // Adds all suggestions from substitution to the general suggestions ArrayList
-        for (String i : substitution){
-            if (!suggestions.contains(i.toLowerCase())){
-                suggestions.add(i);
-            }
-        }
-
-        // Adds all suggestions from omission to the general suggestions ArrayList
-        for (String i : omission){
-            if (!suggestions.contains(i.toLowerCase())){
-                suggestions.add(i);
-            }
-        }
-
-        // Adds all suggestions from insertion to the general suggestions ArrayList
-        for (String i : insertion){
-            if (!suggestions.contains(i.toLowerCase())){
-                suggestions.add(i);
-            }
-        }
-
-        // Adds all suggestions from reversal to the general suggestions ArrayList
-        for (String i : reversal){
-            if (!suggestions.contains(i.toLowerCase())){
-                suggestions.add(i);
-            }
-        }
+        suggestions.addAll(substitution);
+        suggestions.addAll(omission);
+        suggestions.addAll(insertion);
+        suggestions.addAll(reversal);
 
         // Prints/formats all suggestions for word
         System.out.print(word + " => ");
-        suggestions.removeAll(List.of(new String[]{"", word, word.toLowerCase()}));
+
         if(suggestions.size() > 0){
             for (String suggestion : suggestions.subList(0, suggestions.size()-1)) {
-                if(!suggestion.equals("")) {
-                    System.out.print(suggestion + ", ");
-                }
+                System.out.print(suggestion + ", ");
             }
             System.out.print(suggestions.get(suggestions.size()-1) + "\n");
         } else {
             System.out.print("No suggestions\n");
         }
 
-
-
-        return !(suggestions.size() == 0);
+        return !(suggestions.isEmpty());
     }
 
     // This function takes in a string word and tries to correct the spelling by substituting letters and 
     // check if the resulting new word is in the dictionary.
     String correctSpellingSubstitution(String word) {
         StringBuilder sug = new StringBuilder();
+
         for (int i = 1; i <= word.length(); i++){
+
             for (char alphabet = 'a'; alphabet <= 'z'; alphabet++) {
                 String search_word = word.substring(0, i-1) + alphabet + word.substring(i);
-                if (this.dictionary.containsKey(search_word.toLowerCase())&& !search_word.equals("")){
+                if (this.dictionary.containsKey(search_word)){
                     sug.append(search_word).append(" ");
                 }
             }
+
         }
         return sug.toString();
     }
@@ -153,7 +132,7 @@ public class Spell {
         for (int i = 1; i <= word.length(); i++){
 
             String search_word = word.substring(0, i-1) + word.substring(i);
-            if (this.dictionary.containsKey(search_word) && !search_word.equals("")){
+            if (this.dictionary.containsKey(search_word)){
                 sug.append(search_word).append(" ");
             }
 
@@ -164,14 +143,14 @@ public class Spell {
     // This function tries to insert a letter in the misspelled word 
     // and check if the resulting new word is in the dictionary.
     ArrayList<String> correctSpellingWithInsertion(String word) {
-        // add your code here
+
         ArrayList<String> sug = new ArrayList<>();
         for (char alphabet = 'a'; alphabet <= 'z'; alphabet++) {
             char[] search_word = (alphabet + word).toCharArray();
 
             for (int i = 1; i <= word.length()+1; i++){
 
-                if (this.dictionary.containsKey(new String(search_word)) && !(new String(search_word).equals(""))){
+                if (this.dictionary.containsKey(new String(search_word))){
                     sug.add(new String(search_word));
                 }
                 if (i != word.length()+1) {
@@ -197,7 +176,7 @@ public class Spell {
             search_word[i-1] = search_word[i];
             search_word[i] = tmp;
 
-            if (this.dictionary.containsKey(new String(search_word)) && !(new String(search_word).equals(""))){
+            if (this.dictionary.containsKey(new String(search_word))){
                 sug.append(new String(search_word));
             }
             search_word = word.toCharArray();
